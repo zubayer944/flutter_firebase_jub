@@ -10,20 +10,24 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(
-      appBar: AppBar(
-        elevation: 0.5,
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: const Text("Home"),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 1,
+          backgroundColor: Colors.white,
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          title: const Text("Home"),
+        ),
+        body: const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Welcome to EO BD",
+            )
+          ],
+        ),
       ),
-      body: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text("Welcome to EO BD",)
-        ],
-      ),
-    ));
+    );
   }
 }
