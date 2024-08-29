@@ -51,6 +51,23 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
+    flavorDimensions "env"
+    productFlavors {
+        dev {
+            dimension "env"
+            applicationId "dev.flutterexplained.flutter_firebase_project.dev"
+            versionCode 1
+            versionName "1.0"
+        }
+        prod {
+            dimension "env"
+            applicationId "dev.flutterexplained.flutter_firebase_project.prod"
+            versionCode 2
+            versionName "1.1"
+        }
+    }
+
+    
 }
 
 flutter {

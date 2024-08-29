@@ -1,33 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  HomeViewState createState() => HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class HomeViewState extends ConsumerState<HomeView> {
   @override
   Widget build(BuildContext context) {
+    final themeMode = ref.watch(themeProvider);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           elevation: 1,
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.blue, // Update to use EoColors if needed
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: const Text("Home"),
         ),
-        body: const Column(
+        body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "Welcome to EO BD",
-            )
+            const Center(
+              child: Text(
+                "Welcome to EO BD",
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                // Use the themeProvider directly
+                ref.read(themeProvider.notifier).toggleTheme();
+              },
+              icon: Icon(
+                themeMode == ThemeMode.dark
+                    ? Icons.light_mode
+                    : Icons.dark_mode,
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 }
+
+
+class ThemeNotifier extends StateNotifier<ThemeMode> {
+  ThemeNotifier() : super(ThemeMode.dark);
+
+  void toggleTheme() {
+    state = state == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+  }
+}
+
+final themeProvider = StateNotifierProvider<ThemeNotifier, ThemeMode>(
+      (ref) => ThemeNotifier(),
+);
